@@ -1,5 +1,8 @@
 import 'dart:async';
 
+import 'package:income_expense_tracker/resources/string_manager.dart';
+import 'package:income_expense_tracker/resources/styles_manager.dart';
+
 import '../../resources/assets_manager.dart';
 import '../../resources/color_manager.dart';
 import '../../resources/constants_manager.dart';
@@ -52,9 +55,16 @@ class _SplashViewState extends State<SplashView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorManager.primary,
-      body: Center(
-        child: Image.asset(ImageAssets.splashLogo),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: ColorManager.primaryGradient,
+        ),
+        child: Center(
+          child: Text(
+            AppStrings.appName,
+            style: getBoldStyle(color: ColorManager.white, fontSize: 50),
+          ),
+        ),
       ),
     );
   }
