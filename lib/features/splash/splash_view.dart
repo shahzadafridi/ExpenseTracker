@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:income_expense_tracker/resources/string_manager.dart';
 import 'package:income_expense_tracker/resources/styles_manager.dart';
 
-import '../../resources/assets_manager.dart';
 import '../../resources/color_manager.dart';
 import '../../resources/constants_manager.dart';
 import '../../resources/routes_manager.dart';

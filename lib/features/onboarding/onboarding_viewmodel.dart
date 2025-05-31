@@ -61,38 +61,22 @@ class OnBoardingViewModel extends OnBoardingViewModelBase {
   Sink get inputSliderViewObject => _streamController.sink;
 
   @override
-  Stream<SliderViewObject> get outputSliderViewObject =>
-      _streamController.stream;
+  Stream<SliderViewObject> get outputSliderViewObject => _streamController.stream;
 
   void _postDataToView() {
     final sliderViewObject = SliderViewObject(
       _list[_currentPageIndex],
-      _currentPageIndex,
       _list.length,
+      _currentPageIndex
     );
+
     inputSliderViewObject.add(sliderViewObject);
   }
 
   List<SliderObject> _getSliderData() => [
     SliderObject(
-      AppStrings.onBoardingTitle1.tr(),
-      AppStrings.onBoardingSubTitle1.tr(),
+      ImageAssets.onBoardingBackground1,
       ImageAssets.onBoardingLogo1,
-    ),
-    SliderObject(
-      AppStrings.onBoardingTitle2.tr(),
-      AppStrings.onBoardingSubTitle2.tr(),
-      ImageAssets.onBoardingLogo2,
-    ),
-    SliderObject(
-      AppStrings.onBoardingTitle3.tr(),
-      AppStrings.onBoardingSubTitle3.tr(),
-      ImageAssets.onBoardingLogo3,
-    ),
-    SliderObject(
-      AppStrings.onBoardingTitle4.tr(),
-      AppStrings.onBoardingSubTitle4.tr(),
-      ImageAssets.onBoardingLogo4,
-    ),
+    )
   ];
 }
