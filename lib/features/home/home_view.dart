@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'components /home_header_view.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -9,14 +10,10 @@ class HomeView extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Home'),
       ),
-      body: Center(
-        child: Text(
-          'Welcome to the Home Page',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: Theme.of(context).colorScheme.primary,
-                fontSize: 24,
-              ),
-        ),
+      body: const Column(
+        children: [
+          HomeHeaderView(),
+        ],
       ),
     );
   }

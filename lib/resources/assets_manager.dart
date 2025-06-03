@@ -6,6 +6,12 @@ class ImageAssets {
   static const String onBoardingLogo1 = "${_imagePath}onboarding_image1.png";
   static const String onBoardingBackground1 = "${_imagePath}onboarding_bg_image1.png";
 
+  static const String notification = "${_imagePath}notification.png";
+  static const String cureHomeHeaderBg = "${_imagePath}curve_header_image.png";
+  static const String menuIcon = "${_imagePath}menu_icon.png";
+  static const String arrowUp = "${_imagePath}arrow_up.png";
+  static const String arrowDown = "${_imagePath}arrow_down.png";
+
   static const String hollowCirlceIc = "${_imagePath}hollow_cirlce_ic.svg";
   static const String solidCircleIc = "${_imagePath}solid_circle_ic.svg";
   static const String leftArrowIc = "${_imagePath}left_arrow_ic.svg";
