@@ -29,7 +29,7 @@ class HomeHeaderView extends StatelessWidget {
                     child: HeaderTopView(),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 16, right: 16, top: 40),
+                    padding: EdgeInsets.only(left: 12, right: 12, top: 40),
                     child: HeaderSummaryView(),
                   )
                 ],

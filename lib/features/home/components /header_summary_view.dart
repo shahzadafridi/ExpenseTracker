@@ -25,8 +25,7 @@ class HeaderSummaryView extends StatelessWidget {
                 children: [
                   Text(
                     'Total Balance',
-                    style:
-                        getMediumStyle(color: ColorManager.white, fontSize: 16),
+                    style: getMediumStyle(color: ColorManager.white, fontSize: 16),
                   ),
                   Image.asset(
                     ImageAssets.menuIcon,
