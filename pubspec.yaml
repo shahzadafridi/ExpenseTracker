@@ -78,6 +78,7 @@ flutter:
     - assets/images/notification.png
     - assets/images/arrow_up.png
     - assets/images/arrow_down.png
+    - assets/images/transaction_icon.png
     - assets/images/hollow_cirlce_ic.svg
     - assets/images/solid_circle_ic.svg
     - assets/images/left_arrow_ic.svg

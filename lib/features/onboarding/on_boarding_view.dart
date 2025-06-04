@@ -3,7 +3,7 @@ import 'package:income_expense_tracker/resources/styles_manager.dart';
 
 import '../../../app/app_preferences.dart';
 import '../../../app/di.dart';
-import '../../model/sliderobject.dart';
+import '../../model/SliderObjectModel.dart';
 import 'onboarding_viewmodel.dart';
 import '../../resources/assets_manager.dart';
 import '../../resources/color_manager.dart';

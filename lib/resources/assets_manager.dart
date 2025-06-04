@@ -11,6 +11,7 @@ class ImageAssets {
   static const String menuIcon = "${_imagePath}menu_icon.png";
   static const String arrowUp = "${_imagePath}arrow_up.png";
   static const String arrowDown = "${_imagePath}arrow_down.png";
+  static const String transactionIcon = "${_imagePath}transaction_icon.png";
 
   static const String hollowCirlceIc = "${_imagePath}hollow_cirlce_ic.svg";
   static const String solidCircleIc = "${_imagePath}solid_circle_ic.svg";

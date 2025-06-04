@@ -1,5 +1,5 @@
 import 'dart:async';
-import '../../model/sliderobject.dart';
+import '../../model/SliderObjectModel.dart';
 import '../../resources/assets_manager.dart';
 import '../../resources/string_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
