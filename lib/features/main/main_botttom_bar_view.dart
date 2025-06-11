@@ -4,17 +4,17 @@ import 'package:income_expense_tracker/resources/string_manager.dart';
 
 import '../insert_expense_income/insert_expense_income_view.dart';
 import '../summary/summary_view.dart';
-import 'home_view.dart';
+import '../home/home_view.dart';
 
-class HomeBotttomBarView extends StatefulWidget {
-  const HomeBotttomBarView({super.key});
+class MainBotttomBarView extends StatefulWidget {
+  const MainBotttomBarView({super.key});
 
   @override
-  State<HomeBotttomBarView> createState() => _HomeBotttomBarViewState();
+  State<MainBotttomBarView> createState() => _MainBotttomBarViewState();
 }
 
-class _HomeBotttomBarViewState extends State<HomeBotttomBarView> {
-  int currentIndex = 0;
+class _MainBotttomBarViewState extends State<MainBotttomBarView> {
+  int currentIndex = 2;
   final List<Widget> _screens = const [
     HomeView(),
     InsertExpenseIncomeView(),

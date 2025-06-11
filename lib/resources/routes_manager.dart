@@ -1,4 +1,4 @@
-import 'package:income_expense_tracker/features/home/home_botttom_bar_view.dart';
+import 'package:income_expense_tracker/features/main/main_botttom_bar_view.dart';
 
 import '../../app/di.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +23,7 @@ class RouteGenerator {
       case Routes.onBpardingRoute:
         return MaterialPageRoute(builder: (_) => const OnBoardingView());
       case Routes.homeRoute:
-        return MaterialPageRoute(builder: (_) => const HomeBotttomBarView());
+        return MaterialPageRoute(builder: (_) => const MainBotttomBarView());
       default:
         return unDefinedRoute();
     }

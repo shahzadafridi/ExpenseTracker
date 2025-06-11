@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:income_expense_tracker/features/summary/components/summary_header_view.dart';
 
 class SummaryView extends StatelessWidget {
   const SummaryView({super.key});
@@ -9,14 +10,8 @@ class SummaryView extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Summary'),
       ),
-      body: Center(
-        child: Text(
-          'Welcome to the Summary Page',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: Theme.of(context).colorScheme.primary,
-                fontSize: 24,
-              ),
-        ),
+      body: const Column(
+        children: [SummaryHeaderView()],
       ),
     );
   }
