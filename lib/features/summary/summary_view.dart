@@ -17,26 +17,26 @@ class _SummaryTabViewScreenState extends State<SummaryView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Statistics')),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 32),
-          const Padding(
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.only(bottom: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 32),
+            const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16),
-              child: SummaryTopView()),
-          const SizedBox(height: 32),
-          const SummaryCustomTab(),
-          const SizedBox(height: 16),
-          const SummaryTransactionHeaderView(),
-          const SizedBox(height: 16),
-          Expanded(
-              child: ListView.builder(
-            itemCount: transactionList.length,
-            itemBuilder: (context, index) {
-              return TransactionItem(transaction: transactionList[index]);
-            },
-          ))
-        ],
+              child: SummaryTopView(),
+            ),
+            const SizedBox(height: 32),
+            const SummaryCustomTab(),
+            const SizedBox(height: 16),
+            const SummaryTransactionHeaderView(),
+            const SizedBox(height: 16),
+            ...transactionList.map((transaction) {
+              return TransactionItem(transaction: transaction);
+            }).toList(),
+          ],
+        ),
       ),
     );
   }
