@@ -6,7 +6,7 @@ import '../../resources/assets_manager.dart';
 import '../../utils/DummyData.dart';
 import 'components /home_header_view.dart';
 import 'components /transaction_header_view.dart';
-import 'components /transaction_item.dart';
+import '../common/components/transaction_item.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});

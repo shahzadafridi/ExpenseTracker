@@ -80,6 +80,7 @@ flutter:
     - assets/images/arrow_up.png
     - assets/images/arrow_down.png
     - assets/images/transaction_icon.png
+    - assets/images/transaction_sort_icon.png
     - assets/images/arrow_back.png
     - assets/images/download.png
     - assets/images/hollow_cirlce_ic.svg

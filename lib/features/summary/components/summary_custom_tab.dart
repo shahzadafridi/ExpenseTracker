@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:income_expense_tracker/resources/color_manager.dart';
 import 'package:income_expense_tracker/resources/styles_manager.dart';
-import '../tabs/summary_day_view.dart';
-import '../tabs/summary_week_view.dart';
-import '../tabs/summary_month_view.dart';
-import '../tabs/summary_year_view.dart';
+import 'summary_line_chart_view.dart';
 
 class SummaryCustomTab extends StatefulWidget {
   const SummaryCustomTab({super.key});
@@ -20,13 +17,13 @@ class _SummaryCustomTabState extends State<SummaryCustomTab> {
   Widget _buildTabContent() {
     switch (selectedIndex) {
       case 0:
-        return const SummaryDayView();
+        return const SummaryLineChartView();
       case 1:
-        return const SummaryWeekView();
+        return const SummaryLineChartView();
       case 2:
-        return const SummaryMonthView();
+        return const SummaryLineChartView();
       case 3:
-        return const SummaryYearView();
+        return const SummaryLineChartView();
       default:
         return const SizedBox.shrink();
     }
