@@ -99,7 +99,20 @@ class _SummaryLineChartState extends State<SummaryLineChart> {
                         strokeWidth: 1,
                         dashArray: [12, 8],
                       ),
-                      const FlDotData(show: false),
+                      FlDotData(
+                        show: true,
+                        getDotPainter: (spot, percent, barData, index) {
+                          final isTouched = spot == barData.spots[index];
+                          return FlDotCirclePainter(
+                            radius: 4,
+                            color: ColorManager.primary,
+                            strokeWidth: isTouched ? 6 : 0, // simulates ripple
+                            strokeColor: isTouched
+                                ? ColorManager.primary.withOpacity(0.3)
+                                : Colors.transparent,
+                          );
+                        },
+                      ),
                     );
                   }).toList();
                 },
