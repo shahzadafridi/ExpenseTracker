@@ -10,6 +10,12 @@ class AppStrings {
   static const String bottom_tab_insert = "Insert";
   static const String bottom_tab_summary = "Summary";
 
+
+  static const String summary_tab_day = "Day";
+  static const String summary_tab_week = "Week";
+  static const String summary_tab_month = "Month";
+  static const String summary_tab_year = "Year";
+
   static const String skip = "skip";
   static const String username = "username_hint";
   static const String password = "password_hint";
