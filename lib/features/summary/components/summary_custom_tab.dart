@@ -51,8 +51,8 @@ class _SummaryCustomTabState extends State<SummaryCustomTab> {
                     });
                   },
                   child: Container(
-                    width: 90,
-                    height: 40,
+                    width: 80,
+                    height: 38,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       color: isSelected
@@ -63,9 +63,9 @@ class _SummaryCustomTabState extends State<SummaryCustomTab> {
                     child: Text(
                       tabs[index],
                       style: isSelected
-                          ? getBoldStyle(color: Colors.white, fontSize: 16)
+                          ? getBoldStyle(color: Colors.white, fontSize: 14)
                           : getRegularStyle(
-                              color: ColorManager.primary, fontSize: 16),
+                              color: ColorManager.lightGrey, fontSize: 14),
                     ),
                   ),
                 );

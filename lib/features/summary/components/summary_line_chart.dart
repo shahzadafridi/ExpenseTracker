@@ -80,12 +80,17 @@ class _SummaryLineChartState extends State<SummaryLineChart> {
                     const AxisTitles(sideTitles: SideTitles(showTitles: false)),
               ),
               lineTouchData: LineTouchData(
+                enabled: true,
                 touchTooltipData: LineTouchTooltipData(
+                  getTooltipColor: (LineBarSpot touchedSpot) {
+                    return ColorManager.primary.withOpacity(0.1);
+                  },
+                  tooltipBorder: BorderSide(color: ColorManager.primary.withOpacity(0.7), width: 1),
                   getTooltipItems: (touchedSpots) {
                     return touchedSpots.map((spot) {
                       return LineTooltipItem(
-                        '${months[spot.x.toInt()]}: \$${spot.y.toStringAsFixed(2)}',
-                        const TextStyle(color: Colors.white),
+                        '\$${spot.y.toStringAsFixed(2)}',
+                         getSemiBoldStyle(color: ColorManager.primary, fontSize: 12),
                       );
                     }).toList();
                   },
