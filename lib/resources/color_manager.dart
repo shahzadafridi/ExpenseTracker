@@ -24,4 +24,12 @@ class ColorManager {
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
+
+  static const Color lineChartGradientStart = Color(0x4D438883);
+  static const Color lineChartGradientend = Color(0x3F8782);
+  static const LinearGradient lineChartGradient = LinearGradient(
+    colors: [lineChartGradientStart, lineChartGradientend],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  );
 }

@@ -10,23 +10,21 @@ class SummaryView extends StatefulWidget {
 }
 
 class _SummaryTabViewScreenState extends State<SummaryView> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Statistics')),
-      body: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 32),
-            SummaryTopView(),
-            SizedBox(height: 32),
-            SummaryCustomTab(),
-            SizedBox(height: 16),
-          ],
-        ),
+      body: const Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: 32),
+          Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: SummaryTopView()),
+          SizedBox(height: 32),
+          SummaryCustomTab(),
+          SizedBox(height: 16),
+        ],
       ),
     );
   }

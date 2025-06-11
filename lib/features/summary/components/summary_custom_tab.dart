@@ -37,39 +37,41 @@ class _SummaryCustomTabState extends State<SummaryCustomTab> {
     return Column(
       children: [
         // Custom tab bar
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: List.generate(tabs.length, (index) {
-            final isSelected = index == selectedIndex;
+        Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: List.generate(tabs.length, (index) {
+                final isSelected = index == selectedIndex;
 
-            return GestureDetector(
-              onTap: () {
-                setState(() {
-                  selectedIndex = index;
-                });
-              },
-              child: Container(
-                width: 90,
-                height: 40,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: isSelected
-                      ? ColorManager.primary // your selected color
-                      : Colors.transparent,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Text(
-                  tabs[index],
-                  style: isSelected
-                      ? getBoldStyle(color: Colors.white, fontSize: 16)
-                      : getRegularStyle(
-                          color: ColorManager.primary, fontSize: 16),
-                ),
-              ),
-            );
-          }),
-        ),
-        const SizedBox(height: 16),
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      selectedIndex = index;
+                    });
+                  },
+                  child: Container(
+                    width: 90,
+                    height: 40,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: isSelected
+                          ? ColorManager.primary // your selected color
+                          : Colors.transparent,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Text(
+                      tabs[index],
+                      style: isSelected
+                          ? getBoldStyle(color: Colors.white, fontSize: 16)
+                          : getRegularStyle(
+                              color: ColorManager.primary, fontSize: 16),
+                    ),
+                  ),
+                );
+              }),
+            )),
+        const SizedBox(height: 8),
         // Tab content
         _buildTabContent(),
       ],

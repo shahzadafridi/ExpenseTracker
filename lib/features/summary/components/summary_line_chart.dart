@@ -72,15 +72,12 @@ class _SummaryLineChartState extends State<SummaryLineChart> {
                     },
                   ),
                 ),
-                leftTitles: AxisTitles(
-                  sideTitles: SideTitles(
-                    showTitles: false,
-                  ),
-                ),
+                leftTitles:
+                    const AxisTitles(sideTitles: SideTitles(showTitles: false)),
                 rightTitles:
-                    AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                    const AxisTitles(sideTitles: SideTitles(showTitles: false)),
                 topTitles:
-                    AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                    const AxisTitles(sideTitles: SideTitles(showTitles: false)),
               ),
               lineTouchData: LineTouchData(
                 touchTooltipData: LineTouchTooltipData(
@@ -93,6 +90,19 @@ class _SummaryLineChartState extends State<SummaryLineChart> {
                     }).toList();
                   },
                 ),
+                getTouchedSpotIndicator:
+                    (LineChartBarData barData, List<int> spotIndexes) {
+                  return spotIndexes.map((index) {
+                    return TouchedSpotIndicatorData(
+                      FlLine(
+                        color: ColorManager.lightGrey,
+                        strokeWidth: 1,
+                        dashArray: [12, 8],
+                      ),
+                      const FlDotData(show: false),
+                    );
+                  }).toList();
+                },
                 touchCallback:
                     (FlTouchEvent event, LineTouchResponse? response) {
                   if (!event.isInterestedForInteractions ||
@@ -115,7 +125,7 @@ class _SummaryLineChartState extends State<SummaryLineChart> {
                   dotData: const FlDotData(show: false),
                   belowBarData: BarAreaData(
                     show: true,
-                    color: ColorManager.primary.withOpacity(0.2),
+                    gradient: ColorManager.lineChartGradient,
                   ),
                 ),
               ],
