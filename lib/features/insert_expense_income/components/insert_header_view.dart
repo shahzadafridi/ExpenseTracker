@@ -13,17 +13,11 @@ class InsertHeaderView extends StatelessWidget {
         children: [
           Stack(
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(50.0),
-                  bottomRight: Radius.circular(50.0),
-                ),
-                child: Image(
-                  image: AssetImage(ImageAssets.cureHomeHeaderBg),
-                  width: double.infinity,
-                  height: 250.0,
-                  fit: BoxFit.cover,
-                ),
+              Image(
+                image: AssetImage(ImageAssets.cureHomeHeaderBg),
+                width: double.infinity,
+                height: 250.0,
+                fit: BoxFit.cover,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

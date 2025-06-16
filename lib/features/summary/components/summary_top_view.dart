@@ -11,24 +11,12 @@ class SummaryTopView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        ImageIcon(
-          const AssetImage(ImageAssets.arrowBack),
-          color: ColorManager.black,
-          size: 28.0,
-        ),
-        Text(
-          'Statistics',
-          style: getSemiBoldStyle(color: ColorManager.black, fontSize: 18),
-        ),
-        ImageIcon(
-          const AssetImage(ImageAssets.download),
-          color: ColorManager.black,
-          size: 28.0,
-        ),
-      ],
+    return Align(
+      alignment: Alignment.center,
+      child: Text(
+        'Summary',
+        style: getSemiBoldStyle(color: ColorManager.black, fontSize: 18),
+      ),
     );
   }
 }

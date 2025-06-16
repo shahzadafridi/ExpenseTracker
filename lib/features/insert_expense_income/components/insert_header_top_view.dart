@@ -11,23 +11,12 @@ class InsertHeaderTopView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        ImageIcon(
-          const AssetImage(ImageAssets.arrowBack),
-          color: ColorManager.white,
-          size: 28.0,
-        ),
-        Text(
-          'Insert Transaction',
-          style: getSemiBoldStyle(color: ColorManager.white, fontSize: 18),
-        ),
-        const SizedBox(
-          width: 28.0,
-          height: 28.0,
-        ),
-      ],
+    return Align(
+      alignment: Alignment.center,
+      child: Text(
+        'Insert Transaction',
+        style: getBoldStyle(color: ColorManager.white, fontSize: 20),
+      ),
     );
   }
 }
