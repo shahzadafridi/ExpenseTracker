@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:income_expense_tracker/features/summary/components/summary_top_view.dart';
-import '../../utils/DummyData.dart';
+import '../../utils/dummy_data.dart';
 import '../common/components/transaction_item.dart';
 import 'components/summary_custom_tab.dart';
 import 'components/summary_transaction_header_view.dart';

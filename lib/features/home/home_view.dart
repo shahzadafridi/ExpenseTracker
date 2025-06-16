@@ -3,7 +3,7 @@ import '../../model/TransactionModel.dart';
 import '../../resources/color_manager.dart';
 import '../../resources/styles_manager.dart';
 import '../../resources/assets_manager.dart';
-import '../../utils/DummyData.dart';
+import '../../utils/dummy_data.dart';
 import 'components /home_header_view.dart';
 import 'components /transaction_header_view.dart';
 import '../common/components/transaction_item.dart';
