@@ -16,18 +16,27 @@ class SummaryView extends StatefulWidget {
 }
 
 class _SummaryTabViewScreenState extends State<SummaryView> {
+
+  bool _isFetched = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    if (!_isFetched) {
+      _isFetched = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        context.read<MainViewModel>().fetchTransactions();
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
 
     final viewModel = context.watch<MainViewModel>();
     final transactions = viewModel.transactions;
     final isLoading = viewModel.isLoading;
-
-    // Fetch latest transactions AFTER build (only once per push)
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<MainViewModel>().fetchTransactions();
-    });
-
 
     return BaseSafeScaffold(
       systemUiOverlayStyle: SystemUiOverlayStyle.dark,

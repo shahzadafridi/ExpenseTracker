@@ -8,19 +8,33 @@ import 'components /home_header_view.dart';
 import 'components /transaction_header_view.dart';
 import '../common/components/transaction_item.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
+
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  bool _isFetched = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    if (!_isFetched) {
+      _isFetched = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        context.read<MainViewModel>().fetchTransactions();
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<MainViewModel>();
     final transactions = viewModel.transactions;
     final isLoading = viewModel.isLoading;
-
-    // Fetch latest transactions AFTER build (only once per push)
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<MainViewModel>().fetchTransactions();
-    });
 
     return BaseSafeScaffold(
       systemUiOverlayStyle: SystemUiOverlayStyle.light,
