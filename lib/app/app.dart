@@ -1,9 +1,13 @@
+import '../data/local/transaction_database_service.dart';
+import '../data/repository/transaction_repository_impl.dart';
+import '../features/common/transaction_viewmodel.dart';
 import 'app_preferences.dart';
 import 'di.dart';
 import '../resources/routes_manager.dart';
 import '../resources/theme_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:provider/provider.dart';
 
 class MyApp extends StatefulWidget {
   MyApp._internal(); // name constructor
@@ -21,6 +25,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final AppsPreferences _appsPreferences = instance<AppsPreferences>();
+  final dbService = TransactionDatabaseService(); // Create instance
 
   @override
   void didChangeDependencies() {
@@ -30,14 +35,27 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
-      onGenerateRoute: RouteGenerator.getRoute,
-      initialRoute: Routes.splashRoute,
-      theme: getApplicationTheme(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<TransactionViewModel>(
+          create: (_) {
+            final viewModel = TransactionViewModel(
+              repository: TransactionRepositoryImpl(dbService: dbService),
+            );
+            Future.microtask(() => viewModel.init());
+            return viewModel;
+          },
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
+        onGenerateRoute: RouteGenerator.getRoute,
+        initialRoute: Routes.splashRoute,
+        theme: getApplicationTheme(),
+      ),
     );
   }
 }

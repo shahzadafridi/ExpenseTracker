@@ -12,24 +12,31 @@ class TransactionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final category = transaction.category;
+    final icon = category?.icon;
+    final title = category?.title ?? 'Unknown';
+
     return ListTile(
-      leading: Image.asset(
-        transaction.icon,
+      leading: icon != null && icon.isNotEmpty
+          ? Image.network( // assuming it's a network icon
+        icon,
         width: 50,
         height: 50,
-      ),
+        errorBuilder: (_, __, ___) => const Icon(Icons.category),
+      )
+          : const Icon(Icons.category, size: 40, color: Colors.grey),
       title: Text(
-        transaction.title,
+        title,
         style: getMediumStyle(color: ColorManager.black, fontSize: 16),
       ),
       subtitle: Text(
-        transaction.subtitle,
+        transaction.date,
         style: getRegularStyle(color: ColorManager.lightGrey, fontSize: 13),
       ),
       trailing: Text(
-        transaction.isIncome ? '+\$${transaction.amount}' : '-\$${transaction.amount}',
+        transaction.type == 1 ? '+\$${transaction.amount}' : '-\$${transaction.amount}',
         style: getSemiBoldStyle(
-          color: transaction.isIncome ? ColorManager.green : ColorManager.red,
+          color: transaction.type == 1 ? ColorManager.green : ColorManager.red,
           fontSize: 18,
         ),
       ),

@@ -1,15 +1,39 @@
+import 'CategoryModel.dart';
+
 class TransactionModel {
-  final String icon;
+  final String categoryId;
   final String title;
-  final String subtitle;
   final String amount;
-  final bool isIncome;
+  final String date;
+  final bool type;
+  final CategoryModel? category; // optional, used when joining
 
   TransactionModel({
-    required this.icon,
+    required this.categoryId,
     required this.title,
-    required this.subtitle,
     required this.amount,
-    required this.isIncome,
+    required this.date,
+    required this.type,
+    this.category,
   });
+
+  Map<String, dynamic> toJson() => {
+    'categoryId': categoryId,
+    'title': title,
+    'amount': amount,
+    'date': date,
+    'type': type ? 1 : 0,
+  };
+
+  factory TransactionModel.fromJson(Map<String, dynamic> json,
+      {CategoryModel? category}) {
+    return TransactionModel(
+      categoryId: json['categoryId'],
+      title: json['title'],
+      amount: json['amount'],
+      date: json['date'],
+      type: json['type'] == 1,
+      category: category,
+    );
+  }
 }

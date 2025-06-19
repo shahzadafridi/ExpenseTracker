@@ -6,16 +6,19 @@ import 'package:income_expense_tracker/resources/styles_manager.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/services.dart';
 
-import '../../../utils/categories.dart';
+import '../../../model/CategoryModel.dart';
+import '../../../model/TransactionModel.dart';
 
 class InsertFormView extends StatefulWidget {
-  const InsertFormView({super.key});
+  final List<CategoryModel> categories;
+
+  const InsertFormView({super.key, required this.categories});
 
   @override
-  _InsertFormViewState createState() => _InsertFormViewState();
+  InsertFormViewState createState() => InsertFormViewState();
 }
 
-class _InsertFormViewState extends State<InsertFormView> {
+class InsertFormViewState extends State<InsertFormView> {
   final TextEditingController _titleController =
       TextEditingController(text: '');
   final FocusNode _focusTitletNode = FocusNode();
@@ -28,7 +31,7 @@ class _InsertFormViewState extends State<InsertFormView> {
 
   DateTime? selectedDate; // initially null
   final formatCurrency = NumberFormat.simpleCurrency(decimalDigits: 2);
-  String dropdownValue = '';
+  CategoryModel? selectedCategory;
 
   @override
   void initState() {
@@ -70,7 +73,7 @@ class _InsertFormViewState extends State<InsertFormView> {
           mainAxisSize: MainAxisSize.min,
           children: [
             // Dropdown
-            DropdownButtonFormField<String>(
+            DropdownButtonFormField<CategoryModel>(
               decoration: InputDecoration(
                 labelText: 'CATEGORY',
                 labelStyle: getRegularStyle(
@@ -88,18 +91,18 @@ class _InsertFormViewState extends State<InsertFormView> {
                 ),
               ),
               icon: const Icon(Icons.arrow_drop_down),
-              items: categories.map((category) {
-                return DropdownMenuItem<String>(
-                  value: category['name'],
+              items: widget.categories.map((category) {
+                return DropdownMenuItem<CategoryModel>(
+                  value: category,
                   child: Row(
                     children: [
                       CircleAvatar(
-                        backgroundImage: NetworkImage(category['icon']),
+                        backgroundImage: NetworkImage(category.icon),
                         radius: 12,
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        category['name'],
+                        category.title,
                         style: getMediumStyle(
                             color: ColorManager.black, fontSize: 14),
                       ),
@@ -109,7 +112,8 @@ class _InsertFormViewState extends State<InsertFormView> {
               }).toList(),
               onChanged: (value) {
                 setState(() {
-                  dropdownValue = value!;
+                  selectedCategory = value;
+                  // store selected category somewhere for insert
                 });
               },
             ),
@@ -255,5 +259,28 @@ class _InsertFormViewState extends State<InsertFormView> {
         selectedDate = picked;
       });
     }
+  }
+
+  TransactionModel? getTransaction() {
+    final title = _titleController.text.trim();
+    final amount = _amountController.text.trim();
+    final date = selectedDate;
+
+    if (title.isEmpty ||
+        amount.isEmpty ||
+        date == null ||
+        selectedCategory == null) {
+      return null;
+    }
+
+    return TransactionModel(
+      categoryId: selectedCategory!.id,
+      title: title,
+      amount: amount,
+      date: DateFormat('yyyy-MM-dd').format(date),
+      type: true,
+      // You can pass it via parent if needed
+      category: selectedCategory,
+    );
   }
 }
