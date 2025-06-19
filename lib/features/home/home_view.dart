@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:income_expense_tracker/features/common/components/base_safe_scaffold.dart';
 import 'package:provider/provider.dart';
 import '../../resources/assets_manager.dart';
-import '../common/transaction_viewmodel.dart';
+import '../main/main_viewmodel.dart';
 import 'components /home_header_view.dart';
 import 'components /transaction_header_view.dart';
 import '../common/components/transaction_item.dart';
@@ -13,13 +13,13 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = context.watch<TransactionViewModel>();
+    final viewModel = context.watch<MainViewModel>();
     final transactions = viewModel.transactions;
     final isLoading = viewModel.isLoading;
 
     // Fetch latest transactions AFTER build (only once per push)
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<TransactionViewModel>().fetchTransactions();
+      context.read<MainViewModel>().fetchTransactions();
     });
 
     return BaseSafeScaffold(

@@ -1,6 +1,6 @@
 import '../data/local/transaction_database_service.dart';
 import '../data/repository/transaction_repository_impl.dart';
-import '../features/common/transaction_viewmodel.dart';
+import '../features/main/main_viewmodel.dart';
 import 'app_preferences.dart';
 import 'di.dart';
 import '../resources/routes_manager.dart';
@@ -37,9 +37,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<TransactionViewModel>(
+        ChangeNotifierProvider<MainViewModel>(
           create: (_) {
-            final viewModel = TransactionViewModel(
+            final viewModel = MainViewModel(
               repository: TransactionRepositoryImpl(dbService: dbService),
             );
             Future.microtask(() => viewModel.init());

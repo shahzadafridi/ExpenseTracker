@@ -4,7 +4,7 @@ import 'package:income_expense_tracker/model/CategoryModel.dart';
 import '../../data/repository/transaction_repository.dart';
 import '../../model/TransactionModel.dart';
 
-class TransactionViewModel extends ChangeNotifier {
+class MainViewModel extends ChangeNotifier {
   final TransactionRepository repository;
 
   List<TransactionModel> _transactions = [];
@@ -19,7 +19,7 @@ class TransactionViewModel extends ChangeNotifier {
   String? _error;
   String? get error => _error;
 
-  TransactionViewModel({required this.repository});
+  MainViewModel({required this.repository});
 
   Future<void> fetchTransactions() async {
     if (_isLoading) return;

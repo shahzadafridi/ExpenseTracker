@@ -9,7 +9,7 @@ import '../../resources/color_manager.dart';
 import '../../resources/string_manager.dart';
 import '../../resources/values_manager.dart';
 import '../common/components/base_safe_scaffold.dart';
-import '../common/transaction_viewmodel.dart';
+import '../main/main_viewmodel.dart';
 import 'components/insert_form_view.dart';
 
 class InsertExpenseIncomeView extends StatelessWidget {
@@ -17,7 +17,7 @@ class InsertExpenseIncomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = context.watch<TransactionViewModel>();
+    final viewModel = context.watch<MainViewModel>();
     final categories = viewModel.categories;
 
     final GlobalKey<InsertFormViewState> formKey =
