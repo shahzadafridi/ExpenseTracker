@@ -32,7 +32,6 @@ class SummaryLineChartView extends StatelessWidget {
   }
 
   List<FlSpot> _convertToFlSpots(List<TransactionModel> txns) {
-
     print('Transactions: ${txns.map((e) => e.toJson()).toList()}');
 
     Map<int, double> grouped = {};
@@ -40,7 +39,8 @@ class SummaryLineChartView extends StatelessWidget {
     for (final txn in txns) {
       final date = DateTime.tryParse(txn.date);
       if (date != null) {
-        final amount = double.tryParse(txn.amount) ?? 0;
+        // Make amount negative for expense (type 0)
+        final amount = (double.tryParse(txn.amount) ?? 0) * (txn.type == 0 ? -1 : 1);
 
         int x;
         switch (filter) {
@@ -62,7 +62,6 @@ class SummaryLineChartView extends StatelessWidget {
       }
     }
 
-    // Fill missing months/days/weeks with 0
     int length = switch (filter) {
       TimeFilter.day => 24,
       TimeFilter.week => 7,

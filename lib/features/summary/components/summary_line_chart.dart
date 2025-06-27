@@ -66,10 +66,6 @@ class _SummaryLineChartState extends State<SummaryLineChart> {
 
   LineChartData _buildChartData() {
     return LineChartData(
-      minX: 0,
-      maxX: 11,
-      minY: 0,
-      maxY: maxY,
       gridData: const FlGridData(show: false),
       borderData: FlBorderData(show: false),
       titlesData: const FlTitlesData(
