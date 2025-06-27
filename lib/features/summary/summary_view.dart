@@ -26,7 +26,7 @@ class _SummaryTabViewScreenState extends State<SummaryView> {
     if (!_isFetched) {
       _isFetched = true;
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        context.read<MainViewModel>().fetchTransactions();
+        context.read<MainViewModel>().fetchFilteredTransactions();
       });
     }
   }

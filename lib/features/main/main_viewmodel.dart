@@ -81,7 +81,6 @@ class MainViewModel extends ChangeNotifier {
         break;
 
       case TimeFilter.year:
-        print("Fetching transactions for year: ${baseDate.year}, filter: $_selectedFilter");
         startDate = DateTime(baseDate.year);
         endDate = DateTime(baseDate.year + 1);
         break;
@@ -100,6 +99,7 @@ class MainViewModel extends ChangeNotifier {
   }
 
   Future<void> fetchTransactions() async {
+
     if (_isLoading) return;
     _isLoading = true;
     _error = null;

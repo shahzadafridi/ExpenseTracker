@@ -26,8 +26,8 @@ class SummaryLineChart extends StatefulWidget {
 
 class _SummaryLineChartState extends State<SummaryLineChart> {
   int touchedIndex = -1;
-  String selectedMonth = 'Jan';
-  String selectedYear = '2000';
+  String selectedMonth = DateFormat('MMM').format(DateTime.now());
+  String selectedYear = DateFormat('y').format(DateTime.now());
 
   double get maxY => widget.chartData.isEmpty
       ? 1000
@@ -66,10 +66,10 @@ class _SummaryLineChartState extends State<SummaryLineChart> {
 
   LineChartData _buildChartData() {
     return LineChartData(
-      minX: widget.chartData.isEmpty ? 0 : widget.chartData.first.x,
-      maxX: widget.chartData.isEmpty ? 11 : widget.chartData.last.x,
-      minY: widget.chartData.isEmpty ? 0 : widget.chartData.first.y,
-      maxY: widget.chartData.isEmpty ? maxY : widget.chartData.last.y,
+      minX: 0,
+      maxX: 11,
+      minY: 0,
+      maxY: maxY,
       gridData: const FlGridData(show: false),
       borderData: FlBorderData(show: false),
       titlesData: const FlTitlesData(

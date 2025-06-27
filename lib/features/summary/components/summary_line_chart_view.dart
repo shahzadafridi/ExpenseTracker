@@ -32,6 +32,9 @@ class SummaryLineChartView extends StatelessWidget {
   }
 
   List<FlSpot> _convertToFlSpots(List<TransactionModel> txns) {
+
+    print('Transactions: ${txns.map((e) => e.toJson()).toList()}');
+
     Map<int, double> grouped = {};
 
     for (final txn in txns) {
@@ -42,16 +45,16 @@ class SummaryLineChartView extends StatelessWidget {
         int x;
         switch (filter) {
           case TimeFilter.day:
-            x = date.hour; // optional
+            x = date.hour;
             break;
           case TimeFilter.week:
-            x = date.weekday - 1; // 0 = Monday, 6 = Sunday
+            x = date.weekday - 1;
             break;
           case TimeFilter.month:
-            x = date.day - 1; // 0-based day index
+            x = date.day - 1;
             break;
           case TimeFilter.year:
-            x = date.month - 1; // 0-based month index
+            x = date.month - 1;
             break;
         }
 
@@ -59,8 +62,20 @@ class SummaryLineChartView extends StatelessWidget {
       }
     }
 
-    final sorted = grouped.entries.toList()
-      ..sort((a, b) => a.key.compareTo(b.key));
-    return sorted.map((e) => FlSpot(e.key.toDouble(), e.value)).toList();
+    // Fill missing months/days/weeks with 0
+    int length = switch (filter) {
+      TimeFilter.day => 24,
+      TimeFilter.week => 7,
+      TimeFilter.month => 31,
+      TimeFilter.year => 12,
+    };
+
+    List<FlSpot> spots = [];
+    for (int i = 0; i < length; i++) {
+      spots.add(FlSpot(i.toDouble(), grouped[i] ?? 0));
+    }
+
+    return spots;
   }
+
 }
