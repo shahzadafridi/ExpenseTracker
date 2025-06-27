@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:income_expense_tracker/resources/color_manager.dart';
 import 'package:income_expense_tracker/resources/styles_manager.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter/services.dart';
-
 import '../../../model/CategoryModel.dart';
 import '../../../model/TransactionModel.dart';
+import 'insert_form_tab_button.dart';
 
 class InsertFormView extends StatefulWidget {
   final List<CategoryModel> categories;
@@ -32,6 +31,10 @@ class InsertFormViewState extends State<InsertFormView> {
   DateTime? selectedDate; // initially null
   final formatCurrency = NumberFormat.simpleCurrency(decimalDigits: 2);
   CategoryModel? selectedCategory;
+
+  int selectedIndex = 0; // 0 for first tab, 1 for second tab
+
+  final List<String> tabs = ['Expense', 'Income'];
 
   @override
   void initState() {
@@ -72,6 +75,33 @@ class InsertFormViewState extends State<InsertFormView> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            Container(
+              height: 50,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: const Color(0xFFF4F5F6),
+                borderRadius: BorderRadius.circular(40),
+              ),
+              child: Padding(
+                padding:
+                    const EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
+                child: Row(
+                  children: [
+                    InsertFormTabButton(
+                      title: 'Expense',
+                      isSelected: selectedIndex == 0,
+                      onTap: () => setState(() => selectedIndex = 0),
+                    ),
+                    InsertFormTabButton(
+                      title: 'Income',
+                      isSelected: selectedIndex == 1,
+                      onTap: () => setState(() => selectedIndex = 1),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(width: 16, height: 25),
             // Dropdown
             DropdownButtonFormField<CategoryModel>(
               decoration: InputDecoration(
@@ -278,7 +308,7 @@ class InsertFormViewState extends State<InsertFormView> {
       title: title,
       amount: amount,
       date: DateFormat('yyyy-MM-dd').format(date),
-      type: true,
+      type: selectedIndex ,
       // You can pass it via parent if needed
       category: selectedCategory,
     );

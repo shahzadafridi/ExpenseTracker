@@ -59,22 +59,24 @@ class TransactionDatabaseService {
   }
 
   /// Fetch all transactions along with their category details
-  Future<List<TransactionModel>> fetchTransactions() async {
+  Future<List<TransactionModel>> fetchTransactions({bool descending = true}) async {
+    final order = descending ? 'DESC' : 'ASC';
     final result = await _db?.rawQuery('''
-      SELECT t.*, c.title as categoryTitle, c.icon as categoryIcon
-      FROM transactions t
-      LEFT JOIN categories c ON t.categoryId = c.id
-    ''');
+    SELECT t.*, c.title as categoryTitle, c.icon as categoryIcon
+    FROM transactions t
+    LEFT JOIN categories c ON t.categoryId = c.id
+    ORDER BY t.date $order
+  ''');
 
     return result?.map((row) {
-      final category = CategoryModel(
-        id: row['categoryId'] as String,
-        title: row['categoryTitle'] as String,
-        icon: row['categoryIcon'] as String,
-      );
+          final category = CategoryModel(
+            id: row['categoryId'] as String,
+            title: row['categoryTitle'] as String,
+            icon: row['categoryIcon'] as String,
+          );
 
-      return TransactionModel.fromJson(row, category: category);
-    }).toList() ??
+          return TransactionModel.fromJson(row, category: category);
+        }).toList() ??
         [];
   }
 
@@ -83,12 +85,13 @@ class TransactionDatabaseService {
     final result = await _db?.query('categories');
 
     return result?.map((row) {
-      return CategoryModel(
-        id: row['id'] as String,
-        title: row['title'] as String,
-        icon: row['icon'] as String,
-      );
-    }).toList() ?? [];
+          return CategoryModel(
+            id: row['id'] as String,
+            title: row['title'] as String,
+            icon: row['icon'] as String,
+          );
+        }).toList() ??
+        [];
   }
 
   /// Delete transaction by title (you may change to use an ID instead)
@@ -163,10 +166,7 @@ class TransactionDatabaseService {
         'name': 'Entertainment',
         'icon': 'https://cdn-icons-png.flaticon.com/512/3342/3342137.png'
       },
-      {
-        'name': 'Other',
-        'icon': ''
-      },
+      {'name': 'Other', 'icon': ''},
     ];
 
     for (final item in categories) {

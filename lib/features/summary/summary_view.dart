@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:income_expense_tracker/features/common/components/base_safe_scaffold.dart';
 import 'package:income_expense_tracker/features/summary/components/summary_top_view.dart';
 import 'package:provider/provider.dart';
+import '../../utils/static_data.dart';
 import '../common/components/transaction_item.dart';
 import '../main/main_viewmodel.dart';
 import 'components/summary_custom_tab.dart';
@@ -16,7 +17,6 @@ class SummaryView extends StatefulWidget {
 }
 
 class _SummaryTabViewScreenState extends State<SummaryView> {
-
   bool _isFetched = false;
 
   @override
@@ -33,9 +33,8 @@ class _SummaryTabViewScreenState extends State<SummaryView> {
 
   @override
   Widget build(BuildContext context) {
-
     final viewModel = context.watch<MainViewModel>();
-    final transactions = viewModel.transactions;
+    final transactions = viewModel.filteredTransactions;
     final isLoading = viewModel.isLoading;
 
     return BaseSafeScaffold(
@@ -52,7 +51,21 @@ class _SummaryTabViewScreenState extends State<SummaryView> {
               child: SummaryTopView(),
             ),
             const SizedBox(height: 32),
-            const SummaryCustomTab(),
+            SummaryCustomTab(
+              filteredTransactions: transactions,
+              onTabSelected: (filter) {
+                viewModel.setSelectedFilter(filter);
+                viewModel.fetchFilteredTransactions();
+              },
+              onMonthSelected: (month) {
+                final date = DateTime(DateTime.now().year, parseMonthToInt(month));
+                viewModel.fetchFilteredTransactions(selectedDate: date);
+              },
+              onYearSelected: (year) {
+                final date = parseYearToDate(year);
+                viewModel.fetchFilteredTransactions(selectedDate: date);
+              },
+            ),
             const SizedBox(height: 16),
             const SummaryTransactionHeaderView(),
             const SizedBox(height: 16),
