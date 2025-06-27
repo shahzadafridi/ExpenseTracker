@@ -75,7 +75,7 @@ class _SummaryCustomTabState extends State<SummaryCustomTab> {
                 );
               }),
             )),
-        const SizedBox(height: 8),
+        const SizedBox(height: 25),
         // Tab content
         SummaryLineChartView(
           transactions: widget.filteredTransactions,

@@ -31,42 +31,54 @@ class _SummaryLineChartState extends State<SummaryLineChart> {
 
   double get maxY => widget.chartData.isEmpty
       ? 1000
-      : (widget.chartData.map((e) => e.y).reduce((a, b) => a > b ? a : b) * 1.2).ceilToDouble();
+      : (widget.chartData.map((e) => e.y).reduce((a, b) => a > b ? a : b) * 1.2)
+          .ceilToDouble();
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      reverse: true,
-      scrollDirection: Axis.horizontal,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width + 200,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
           height: 250,
-          child: LineChart(_buildChartData()),
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+          child: widget.chartData.isEmpty
+              ? Center(
+                  child: Text(
+                    'no_data_available'.tr(),
+                    style: getRegularStyle(
+                        color: ColorManager.lightGrey, fontSize: 14),
+                  ),
+                )
+              : LineChart(
+                  _buildChartData(),
+                  duration: const Duration(milliseconds: 250),
+                ),
         ),
-      ),
+        if (widget.selectedFilter != TimeFilter.day)
+          Padding(
+            padding: const EdgeInsets.only(top: 12),
+            child: _buildFilterTiles(),
+          ),
+      ],
     );
   }
 
   LineChartData _buildChartData() {
     return LineChartData(
-      minX: 0,
-      maxX: 11,
-      minY: 0,
-      maxY: maxY,
+      minX: widget.chartData.isEmpty ? 0 : widget.chartData.first.x,
+      maxX: widget.chartData.isEmpty ? 11 : widget.chartData.last.x,
+      minY: widget.chartData.isEmpty ? 0 : widget.chartData.first.y,
+      maxY: widget.chartData.isEmpty ? maxY : widget.chartData.last.y,
       gridData: const FlGridData(show: false),
       borderData: FlBorderData(show: false),
-      titlesData: FlTitlesData(
+      titlesData: const FlTitlesData(
         bottomTitles: AxisTitles(
-          sideTitles: SideTitles(
-            showTitles: true,
-            interval: 1,
-            getTitlesWidget: _buildBottomTitle,
-          ),
+          sideTitles: SideTitles(showTitles: false),
         ),
         leftTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-        rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+        rightTitles:
+            const AxisTitles(sideTitles: SideTitles(showTitles: false)),
         topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
       ),
       lineTouchData: _buildLineTouchData(),
@@ -86,40 +98,63 @@ class _SummaryLineChartState extends State<SummaryLineChart> {
     );
   }
 
-  Widget _buildBottomTitle(double value, TitleMeta meta) {
-    int index = value.toInt();
+  Widget _buildFilterTiles() {
     final isMonth = widget.selectedFilter == TimeFilter.month;
-    final labels = isMonth ? months : years;
-    if (index >= 0 && index < labels.length) {
-      final label = labels[index];
-      final isSelected = isMonth
-          ? selectedMonth == label
-          : selectedYear == label;
+    final labels = widget.selectedFilter == TimeFilter.year
+        ? years
+        : widget.selectedFilter == TimeFilter.week
+            ? weekDays
+            : months;
 
-      return GestureDetector(
-        onTap: () {
-          setState(() {
-            if (isMonth) {
-              selectedMonth = label;
-              widget.onMonthSelected(label);
-            } else {
-              selectedYear = label;
-              widget.onYearSelected(label);
-            }
-          });
+    return SizedBox(
+      height: 40,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: labels.length,
+        itemBuilder: (context, index) {
+          final label = labels[index];
+          final isSelected = (isMonth && selectedMonth == label) ||
+              (!isMonth && selectedYear == label);
+
+          return GestureDetector(
+            onTap: () {
+              setState(() {
+                if (isMonth) {
+                  selectedMonth = label;
+                  widget.onMonthSelected(label);
+                } else {
+                  selectedYear = label;
+                  widget.onYearSelected(label);
+                }
+              });
+            },
+            child: Container(
+              height: 40,
+              // Ensures consistent height
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              alignment: Alignment.center,
+              // Align text vertically & horizontally
+              decoration: BoxDecoration(
+                color: isSelected
+                    ? ColorManager.primary.withOpacity(0.1)
+                    : Colors.transparent,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Center(
+                child: Text(
+                  label,
+                  textAlign: TextAlign.center,
+                  style: isSelected
+                      ? getBoldStyle(color: ColorManager.primary, fontSize: 12)
+                      : getRegularStyle(
+                          color: ColorManager.lightGrey, fontSize: 12),
+                ),
+              ),
+            ),
+          );
         },
-        child: Padding(
-          padding: const EdgeInsets.only(top: 4),
-          child: Text(
-            label,
-            style: isSelected
-                ? getBoldStyle(color: ColorManager.primary, fontSize: 14)
-                : getRegularStyle(color: ColorManager.lightGrey, fontSize: 13),
-          ),
-        ),
-      );
-    }
-    return const SizedBox.shrink();
+      ),
+    );
   }
 
   LineTouchData _buildLineTouchData() {
@@ -133,9 +168,9 @@ class _SummaryLineChartState extends State<SummaryLineChart> {
         ),
         getTooltipItems: (touchedSpots) => touchedSpots
             .map((spot) => LineTooltipItem(
-          '\$${spot.y.toStringAsFixed(2)}',
-          getSemiBoldStyle(color: ColorManager.primary, fontSize: 12),
-        ))
+                  '\$${spot.y.toStringAsFixed(2)}',
+                  getSemiBoldStyle(color: ColorManager.primary, fontSize: 12),
+                ))
             .toList(),
       ),
       getTouchedSpotIndicator: (barData, spotIndexes) {
@@ -166,7 +201,7 @@ class _SummaryLineChartState extends State<SummaryLineChart> {
       touchCallback: (event, response) {
         setState(() {
           touchedIndex = (event.isInterestedForInteractions &&
-              response?.lineBarSpots?.isNotEmpty == true)
+                  response?.lineBarSpots?.isNotEmpty == true)
               ? response!.lineBarSpots!.first.spotIndex
               : -1;
         });

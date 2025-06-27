@@ -66,9 +66,8 @@ class _SummaryTabViewScreenState extends State<SummaryView> {
                 viewModel.fetchFilteredTransactions(selectedDate: date);
               },
             ),
-            const SizedBox(height: 16),
             const SummaryTransactionHeaderView(),
-            const SizedBox(height: 16),
+            const SizedBox(height: 8),
             if (isLoading)
               const Center(child: CircularProgressIndicator())
             else if (transactions.isEmpty)
