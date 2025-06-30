@@ -14,7 +14,7 @@ class MainBotttomBarView extends StatefulWidget {
 }
 
 class _MainBotttomBarViewState extends State<MainBotttomBarView> {
-  int currentIndex = 1;
+  int currentIndex = 0;
   final List<Widget> _screens = const [
     HomeView(),
     InsertExpenseIncomeView(),
