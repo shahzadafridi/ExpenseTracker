@@ -9,9 +9,9 @@ A cross-platform Flutter application to manage your personal finances by trackin
     <td>Summary</td>
   </tr>
   <tr>
-    <td valign="top"><img src="https://github.com/user-attachments/assets/2a91f18d-20a1-4bea-9f97-8c73dce94206" width=550 height=650></td>
-    <td valign="top"><img src="https://github.com/user-attachments/assets/39c147a6-2447-4f3f-a318-f866836eafa1" width=550 height=650></td>
-    <td valign="top"><img src="https://github.com/user-attachments/assets/cb6199d6-3e55-41df-b203-913a63ef2c4c" width=550 height=650></td>
+    <td valign="top"><img src="https://github.com/user-attachments/assets/2a91f18d-20a1-4bea-9f97-8c73dce94206" width=450 height=600></td>
+    <td valign="top"><img src="https://github.com/user-attachments/assets/39c147a6-2447-4f3f-a318-f866836eafa1" width=450 height=600></td>
+    <td valign="top"><img src="https://github.com/user-attachments/assets/cb6199d6-3e55-41df-b203-913a63ef2c4c" width=450 height=600></td>
   </tr>
  </table>
 
