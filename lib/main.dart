@@ -10,6 +10,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await initAppModule();
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     EasyLocalization(
       supportedLocales: const [ARABIC_LOCALE, ENGLISH_LOCALE],
