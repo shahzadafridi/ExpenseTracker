@@ -5,6 +5,7 @@ class AppStrings {
   static const String noRouteFound = "no_route_found";
   static const String onBoardingTitle1 = "Spend Smarter Save More";
   static const String onBoardingButton = "Get Started";
+  static const String next = "Next";
 
   static const String insertButton = "Add";
 

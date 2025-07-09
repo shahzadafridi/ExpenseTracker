@@ -4,6 +4,7 @@ const String _jsonPath = "assets/json/";
 class ImageAssets {
 
   static const String onBoardingLogo1 = "${_imagePath}onboarding_image1.png";
+  static const String onBoardingLogo2 = "${_imagePath}onboarding_image2.png";
   static const String onBoardingBackground1 = "${_imagePath}onboarding_bg_image1.png";
 
   static const String notification = "${_imagePath}notification.png";

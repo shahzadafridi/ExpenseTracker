@@ -6,16 +6,23 @@ import 'package:easy_localization/easy_localization.dart';
 
 abstract class OnBoardingViewModelBase {
   void dispose();
+
   void start();
+
   int goNext();
+
   int goPrevious();
+
   void onPageChanged(int index);
+
   Sink get inputSliderViewObject;
+
   Stream<SliderViewObject> get outputSliderViewObject;
 }
 
 class OnBoardingViewModel extends OnBoardingViewModelBase {
-  final StreamController<SliderViewObject> _streamController = StreamController<SliderViewObject>();
+  final StreamController<SliderViewObject> _streamController =
+      StreamController<SliderViewObject>();
 
   late final List<SliderObject> _list;
   int _currentPageIndex = 0;
@@ -61,22 +68,26 @@ class OnBoardingViewModel extends OnBoardingViewModelBase {
   Sink get inputSliderViewObject => _streamController.sink;
 
   @override
-  Stream<SliderViewObject> get outputSliderViewObject => _streamController.stream;
+  Stream<SliderViewObject> get outputSliderViewObject =>
+      _streamController.stream;
 
   void _postDataToView() {
     final sliderViewObject = SliderViewObject(
-      _list[_currentPageIndex],
-      _list.length,
-      _currentPageIndex
-    );
+        _list[_currentPageIndex], _list.length, _currentPageIndex);
 
     inputSliderViewObject.add(sliderViewObject);
   }
 
   List<SliderObject> _getSliderData() => [
-    SliderObject(
-      ImageAssets.onBoardingBackground1,
-      ImageAssets.onBoardingLogo1,
-    )
-  ];
+        SliderObject(
+            "Spend Smarter Save More",
+            ImageAssets.onBoardingBackground1,
+            ImageAssets.onBoardingLogo1
+        ),
+        SliderObject(
+            "Where does it come from",
+            ImageAssets.onBoardingBackground1,
+            ImageAssets.onBoardingLogo2
+        )
+      ];
 }
