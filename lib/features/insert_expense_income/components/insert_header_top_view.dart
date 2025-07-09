@@ -4,8 +4,8 @@ import '../../../resources/assets_manager.dart';
 import '../../../resources/color_manager.dart';
 import '../../../resources/styles_manager.dart';
 
-class SummaryTopView extends StatelessWidget {
-  const SummaryTopView({
+class InsertHeaderTopView extends StatelessWidget {
+  const InsertHeaderTopView({
     super.key,
   });
 
@@ -14,8 +14,8 @@ class SummaryTopView extends StatelessWidget {
     return Align(
       alignment: Alignment.center,
       child: Text(
-        'Summary',
-        style: getSemiBoldStyle(color: ColorManager.black, fontSize: 18),
+        'Insert Transaction',
+        style: getBoldStyle(color: ColorManager.white, fontSize: 20),
       ),
     );
   }

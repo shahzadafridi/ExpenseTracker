@@ -6,6 +6,8 @@ class AppStrings {
   static const String onBoardingTitle1 = "Spend Smarter Save More";
   static const String onBoardingButton = "Get Started";
 
+  static const String insertButton = "Add";
+
   static const String bottom_tab_home = "Home";
   static const String bottom_tab_insert = "Insert";
   static const String bottom_tab_summary = "Summary";
