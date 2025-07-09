@@ -46,7 +46,7 @@ class _HomeViewState extends State<HomeView> {
       ),
       body: Column(
         children: [
-          const HomeHeaderView(),
+          HomeHeaderView(transactions),
           const TransactionHeaderView(),
           const SizedBox(height: 16),
           Expanded(

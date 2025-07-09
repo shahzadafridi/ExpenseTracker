@@ -1,12 +1,31 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../model/TransactionModel.dart';
 import '../../../resources/assets_manager.dart';
 import '../../../resources/color_manager.dart';
 import '../../../resources/styles_manager.dart';
 
 class HeaderSummaryView extends StatelessWidget {
-  const HeaderSummaryView({super.key});
+
+  final List<TransactionModel> transactions;
+  const HeaderSummaryView(this.transactions, {super.key});
+
+  double _calculateTotalBalance() {
+    return _calculateIncome() - _calculateExpense();
+  }
+
+  double _calculateIncome() {
+    return transactions
+        .where((t) => t.type == 1) // Assuming 1 = income
+        .fold(0.0, (sum, t) => sum + (double.tryParse(t.amount) ?? 0.0));
+  }
+
+  double _calculateExpense() {
+    return transactions
+        .where((t) => t.type == 0) // Assuming 0 = expense
+        .fold(0.0, (sum, t) => sum + (double.tryParse(t.amount) ?? 0.0));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +55,7 @@ class HeaderSummaryView extends StatelessWidget {
               ),
               const SizedBox(height: 8.0),
               Text(
-                '\$5,000.00',
+                '\$${_calculateTotalBalance().toStringAsFixed(2)}',
                 style: getBoldStyle(color: ColorManager.white, fontSize: 30),
               ),
               const SizedBox(height: 16.0),
@@ -80,12 +99,12 @@ class HeaderSummaryView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '\$2,500.00',
+                    '\$${_calculateIncome().toStringAsFixed(2)}',
                     style: getSemiBoldStyle(
                         color: ColorManager.white, fontSize: 20),
                   ),
                   Text(
-                    '\$1,500.00',
+                    '\$${_calculateExpense().toStringAsFixed(2)}',
                     style: getSemiBoldStyle(
                         color: ColorManager.white, fontSize: 20),
                   )
