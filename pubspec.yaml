@@ -73,6 +73,12 @@ flutter:
   assets:
     - assets/images/onboarding_image1.png
     - assets/images/onboarding_bg_image1.png
+    - assets/images/curve_header_image.png
+    - assets/images/menu_icon.png
+    - assets/images/notification.png
+    - assets/images/arrow_up.png
+    - assets/images/arrow_down.png
+    - assets/images/transaction_icon.png
     - assets/images/hollow_cirlce_ic.svg
     - assets/images/solid_circle_ic.svg
     - assets/images/left_arrow_ic.svg
@@ -82,6 +88,7 @@ flutter:
     - assets/images/invite_friends_ic.svg
     - assets/images/logout_ic.svg
     - assets/images/settings_right_arrow_ic.svg
+
     - assets/translations/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

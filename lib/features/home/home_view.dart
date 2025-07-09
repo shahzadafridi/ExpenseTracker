@@ -1,4 +1,12 @@
 import 'package:flutter/material.dart';
+import '../../model/TransactionModel.dart';
+import '../../resources/color_manager.dart';
+import '../../resources/styles_manager.dart';
+import '../../resources/assets_manager.dart';
+import '../../utils/DummyData.dart';
+import 'components /home_header_view.dart';
+import 'components /transaction_header_view.dart';
+import 'components /transaction_item.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -9,15 +17,25 @@ class HomeView extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Home'),
       ),
-      body: Center(
-        child: Text(
-          'Welcome to the Home Page',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: Theme.of(context).colorScheme.primary,
-                fontSize: 24,
-              ),
-        ),
+      body: Column(
+        children: [
+          const HomeHeaderView(),
+          const TransactionHeaderView(),
+          const SizedBox(height: 16),
+          Expanded(
+            child: ListView.builder(
+              itemCount: transactionList.length,
+              itemBuilder: (context, index) {
+                return TransactionItem(transaction: transactionList[index]);
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
 }
+
+
+
+

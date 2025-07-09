@@ -15,6 +15,8 @@ class ColorManager {
   static Color error = const Color(0xffe61f34);
 
   static Color black = const Color(0xff000000);
+  static Color green = const Color(0xff25A969);
+  static Color red = const Color(0xffF96251);
 
   static const Color gradientStart = Color(0xFF69AEA9);
   static const Color gradientEnd = Color(0xFF3F8782);
