@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:income_expense_tracker/resources/color_manager.dart';
 import 'package:income_expense_tracker/resources/styles_manager.dart';
+import '../../../model/TransactionModel.dart';
+import '../../main/main_viewmodel.dart';
 import 'summary_line_chart_view.dart';
 
 class SummaryCustomTab extends StatefulWidget {
-  const SummaryCustomTab({super.key});
+  final void Function(TimeFilter filter) onTabSelected;
+  final void Function(String month) onMonthSelected;
+  final void Function(String year) onYearSelected;
+  final List<TransactionModel> filteredTransactions;
+
+  const SummaryCustomTab({
+    super.key,
+    required this.onTabSelected,
+    required this.filteredTransactions,
+    required this.onMonthSelected,
+    required this.onYearSelected,
+  });
 
   @override
   State<SummaryCustomTab> createState() => _SummaryCustomTabState();
@@ -14,20 +27,12 @@ class _SummaryCustomTabState extends State<SummaryCustomTab> {
   final List<String> tabs = ["Day", "Week", "Month", "Year"];
   int selectedIndex = 0;
 
-  Widget _buildTabContent() {
-    switch (selectedIndex) {
-      case 0:
-        return const SummaryLineChartView();
-      case 1:
-        return const SummaryLineChartView();
-      case 2:
-        return const SummaryLineChartView();
-      case 3:
-        return const SummaryLineChartView();
-      default:
-        return const SizedBox.shrink();
-    }
-  }
+  final List<TimeFilter> filterValues = [
+    TimeFilter.day,
+    TimeFilter.week,
+    TimeFilter.month,
+    TimeFilter.year,
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +51,8 @@ class _SummaryCustomTabState extends State<SummaryCustomTab> {
                     setState(() {
                       selectedIndex = index;
                     });
+                    widget.onTabSelected(
+                        filterValues[selectedIndex]); // 🔥 Call parent callback
                   },
                   child: Container(
                     width: 80,
@@ -68,9 +75,14 @@ class _SummaryCustomTabState extends State<SummaryCustomTab> {
                 );
               }),
             )),
-        const SizedBox(height: 8),
+        const SizedBox(height: 25),
         // Tab content
-        _buildTabContent(),
+        SummaryLineChartView(
+          transactions: widget.filteredTransactions,
+          filter: filterValues[selectedIndex],
+          onMonthSelected: widget.onMonthSelected,
+          onYearSelected: widget.onYearSelected,
+        ),
       ],
     );
   }

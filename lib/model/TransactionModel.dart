@@ -5,7 +5,7 @@ class TransactionModel {
   final String title;
   final String amount;
   final String date;
-  final bool type;
+  final int type;
   final CategoryModel? category; // optional, used when joining
 
   TransactionModel({
@@ -22,7 +22,7 @@ class TransactionModel {
     'title': title,
     'amount': amount,
     'date': date,
-    'type': type ? 1 : 0,
+    'type': type ,
   };
 
   factory TransactionModel.fromJson(Map<String, dynamic> json,
@@ -32,7 +32,7 @@ class TransactionModel {
       title: json['title'],
       amount: json['amount'],
       date: json['date'],
-      type: json['type'] == 1,
+      type: json['type'],
       category: category,
     );
   }
