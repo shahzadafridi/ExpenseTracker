@@ -1,8 +1,9 @@
 class SliderObject {
   final String background;
   final String image;
+  final String? title;
 
-  SliderObject(this.background, this.image);
+  SliderObject( this.title, this.background, this.image);
 }
 
 class SliderViewObject {

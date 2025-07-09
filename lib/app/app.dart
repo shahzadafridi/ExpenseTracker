@@ -53,7 +53,7 @@ class _MyAppState extends State<MyApp> {
         supportedLocales: context.supportedLocales,
         locale: context.locale,
         onGenerateRoute: RouteGenerator.getRoute,
-        initialRoute: Routes.splashRoute,
+        initialRoute: Routes.onBpardingRoute,
         theme: getApplicationTheme(),
       ),
     );

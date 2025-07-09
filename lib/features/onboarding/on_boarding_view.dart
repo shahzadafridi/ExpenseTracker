@@ -64,15 +64,55 @@ class _OnBoardingViewState extends State<OnBoardingView> {
 
     return Scaffold(
         backgroundColor: ColorManager.white,
-        body: PageView.builder(
-          controller: _controller,
-          itemCount: sliderViewObject.numberOfSlides,
-          onPageChanged: (index) {
-            _viewModel.onPageChanged(index);
-          },
-          itemBuilder: (_, index) =>
-              OnBoardingPage(sliderViewObject.sliderObject),
-        ));
+        body: Stack(children: [
+          PageView.builder(
+            controller: _controller,
+            itemCount: sliderViewObject.numberOfSlides,
+            onPageChanged: (index) {
+              _viewModel.onPageChanged(index);
+            },
+            itemBuilder: (_, index) =>
+                OnBoardingPage(sliderViewObject.sliderObject),
+          ),
+          Positioned(
+              left: AppSize.s32,
+              right: AppSize.s32,
+              bottom: AppSize.s120,
+              child: Container(
+                width: double.infinity, // or your desired width
+                decoration: BoxDecoration(
+                  gradient: ColorManager.primaryGradient,
+                  borderRadius: BorderRadius.circular(AppSize.s40),
+                ),
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (sliderViewObject.currentIndex ==
+                        sliderViewObject.numberOfSlides - 1) {
+                      Navigator.pushReplacementNamed(context, Routes.homeRoute);
+                    } else {
+                      _controller.nextPage(
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeIn,
+                      );
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    elevation: AppSize.s8,
+                    padding: const EdgeInsets.symmetric(vertical: AppSize.s16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AppSize.s40),
+                    ),
+                  ),
+                  child: Text(
+                    sliderViewObject.currentIndex ==
+                            sliderViewObject.numberOfSlides - 1
+                        ? AppStrings.onBoardingButton
+                        : AppStrings.next,
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ),
+              ))
+        ]));
   }
 }
 
@@ -109,37 +149,10 @@ class OnBoardingPage extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(AppSize.s32),
           child: Text(
-            AppStrings.onBoardingTitle1,
+            sliderObject.title ?? AppStrings.onBoardingTitle1,
             style: getBoldStyle(
                 color: ColorManager.primary, fontSize: FontSize.s34),
             textAlign: TextAlign.center,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(
-              left: AppSize.s32, right: AppSize.s32, top: AppSize.s8),
-          child: Container(
-            width: double.infinity, // or your desired width
-            decoration: BoxDecoration(
-              gradient: ColorManager.primaryGradient,
-              borderRadius: BorderRadius.circular(AppSize.s40),
-            ),
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, Routes.homeRoute);
-              },
-              style: ElevatedButton.styleFrom(
-                elevation: AppSize.s8,
-                padding: const EdgeInsets.symmetric(vertical: AppSize.s16),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AppSize.s40),
-                ),
-              ),
-              child: const Text(
-                AppStrings.onBoardingButton,
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
           ),
         )
       ],
