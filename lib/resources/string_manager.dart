@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 
 class AppStrings {
+  static const String appName = "mono";
   static const String noRouteFound = "no_route_found";
   static const String onBoardingTitle1 = "on_boarding_title1";
   static const String onBoardingTitle2 = "on_boarding_title2";
