@@ -29,17 +29,17 @@ This app helps users to:
 - Record income and expense transactions
 - Categorize transactions (e.g., food, transport, entertainment)
 - Filter transactions by date range
-- Export and import data as CSV
-- Visualize spending patterns
+- Export data
 
 ## Features
-- [x] Add, edit, and delete transactions
+- [x] Onboarding Screen
+- [x] Home Screen with summary
+- [x] Insert income/expense transactions 
+- [x] Summary Screen
 - [x] Categorize transactions
 - [x] View transaction history
-- [x] Dashboard with summary and charts
-- [ ] Export data to CSV
-- [ ] Import data from CSV
-- [ ] Filter transactions by date range
+- [x] Filter transactions by date range
+- [ ] Export data
 - [ ] Multi-language support (English, Arabic)
 
 ## Project Structure
